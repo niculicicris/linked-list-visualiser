@@ -5,6 +5,7 @@ import me.niculicicris.visualiser.application.VisualiserApplication;
 public class Main {
 
     public static void main(String[] args) {
-        VisualiserApplication.run();
+        VisualiserApplication application = new VisualiserApplication();
+        application.run();
     }
 }
