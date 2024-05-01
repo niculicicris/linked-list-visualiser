@@ -1,8 +1,10 @@
 package me.niculicicris.visualiser;
 
+import me.niculicicris.visualiser.application.VisualiserApplication;
+
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello, world!");
+        VisualiserApplication.run();
     }
 }
