@@ -9,7 +9,18 @@ import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class Window {
+    private static Window instance;
     private long windowId;
+
+    private Window() {}
+
+    public static Window getInstance() {
+        if (instance == null) {
+            instance = new Window();
+        }
+
+        return instance;
+    }
 
     public void initialize() {
         initializeGlfw();
@@ -53,13 +64,13 @@ public class Window {
         return glfwWindowShouldClose(windowId);
     }
 
-    public void pollWindowEvents(Runnable handleSceneEvents) {
+    public void pollWindowEvents(Runnable handleEvents) {
         glfwPollEvents();
-        handleSceneEvents.run();
+        handleEvents.run();
     }
 
-    public void renderWindowContents(Runnable renderScene) {
-        renderScene.run();
+    public void renderWindow(Runnable render) {
+        render.run();
         glClear(GL_COLOR_BUFFER_BIT);
         glfwSwapBuffers(windowId);
     }

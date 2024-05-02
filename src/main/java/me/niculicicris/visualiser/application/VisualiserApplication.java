@@ -20,19 +20,19 @@ public class VisualiserApplication {
     }
 
     private void initializeWindow() {
-        window = new Window();
+        window = Window.getInstance();
         window.initialize();
     }
 
     private void initializeSceneManager() {
-        Scene scene = new Scene();
-        sceneManager = new SceneManager(scene);
+        sceneManager = SceneManager.getInstance();
+        sceneManager.setScene(new Scene());
     }
 
     private void loop() {
         while (!window.shouldClose()) {
             window.pollWindowEvents(sceneManager::handleSceneEvents);
-            window.renderWindowContents(sceneManager::renderScene);
+            window.renderWindow(sceneManager::renderScene);
         }
     }
 
