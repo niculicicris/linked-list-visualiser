@@ -1,4 +1,4 @@
-package me.niculicicris.visualiser.renderer;
+package me.niculicicris.visualiser.manger;
 
 import me.niculicicris.visualiser.component.Renderable;
 import me.niculicicris.visualiser.scene.Scene;

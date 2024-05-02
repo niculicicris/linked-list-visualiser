@@ -1,6 +1,6 @@
 package me.niculicicris.visualiser.component;
 
-import me.niculicicris.visualiser.renderer.SceneManager;
+import me.niculicicris.visualiser.manger.SceneManager;
 
 import java.util.Optional;
 
