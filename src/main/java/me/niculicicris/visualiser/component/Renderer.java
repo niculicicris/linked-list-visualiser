@@ -1,6 +1,5 @@
 package me.niculicicris.visualiser.component;
 
-public interface Renderable extends Component {
-
+public interface Renderer extends Component {
     void render();
 }

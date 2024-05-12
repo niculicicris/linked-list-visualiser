@@ -1,53 +1,49 @@
 package me.niculicicris.visualiser.application;
 
-import me.niculicicris.visualiser.component.LinkedListComponent;
-import me.niculicicris.visualiser.manger.SceneManager;
-import me.niculicicris.visualiser.renderer.Window;
-import me.niculicicris.visualiser.scene.Scene;
+import me.niculicicris.visualiser.scene.SceneManager;
+import me.niculicicris.visualiser.window.Window;
 
 public class VisualiserApplication {
-    private SceneManager sceneManager;
-    private Window window;
+    private static final Window window = Window.getInstance();
+    private static final SceneManager sceneManager = SceneManager.getInstance();
 
-    public void run() {
+    public static void run() {
         initialize();
-        loop();
+        startLoop();
         cleanup();
     }
 
-    private void initialize() {
+    private static void initialize() {
         initializeWindow();
         initializeSceneManager();
     }
 
-    private void initializeWindow() {
-        window = Window.getInstance();
+    private static void initializeWindow() {
         window.initialize();
     }
 
-    private void initializeSceneManager() {
-        Scene scene = new Scene();
-
-        LinkedListComponent list = new LinkedListComponent();
-        list.insertAtBeginning(1);
-        list.insertAtEnd(11);
-        list.insertAtEnd(42);
-        list.insertAtEnd(234);
-
-        scene.addComponent("list", list);
-
-        sceneManager = SceneManager.getInstance();
-        sceneManager.setScene(scene);
+    private static void initializeSceneManager() {
+        sceneManager.initialize();
     }
 
-    private void loop() {
+    private static void startLoop() {
         while (!window.shouldClose()) {
-            window.pollWindowEvents(sceneManager::handleSceneEvents);
-            window.renderWindow(sceneManager::renderScene);
+            update();
+            render();
         }
     }
 
-    private void cleanup() {
+    private static void update() {
+        window.pollWindowEvents();
+        sceneManager.updateScene();
+    }
+
+    private static void render() {
+        sceneManager.renderScene();
+        window.renderWindow();
+    }
+
+    private static void cleanup() {
         window.cleanup();
     }
 }

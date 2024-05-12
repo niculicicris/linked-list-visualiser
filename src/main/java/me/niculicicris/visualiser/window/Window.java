@@ -1,4 +1,4 @@
-package me.niculicicris.visualiser.renderer;
+package me.niculicicris.visualiser.window;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
 
@@ -64,13 +64,11 @@ public class Window {
         return glfwWindowShouldClose(windowId);
     }
 
-    public void pollWindowEvents(Runnable handleEvents) {
+    public void pollWindowEvents() {
         glfwPollEvents();
-        handleEvents.run();
     }
 
-    public void renderWindow(Runnable render) {
-        render.run();
+    public void renderWindow() {
         glClear(GL_COLOR_BUFFER_BIT);
         glfwSwapBuffers(windowId);
     }
