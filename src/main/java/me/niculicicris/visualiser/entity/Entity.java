@@ -3,6 +3,7 @@ package me.niculicicris.visualiser.entity;
 import me.niculicicris.visualiser.component.Component;
 import me.niculicicris.visualiser.component.Renderer;
 import me.niculicicris.visualiser.component.Script;
+import me.niculicicris.visualiser.component.Setup;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,13 @@ public abstract class Entity {
 
     public Optional<Component> getComponent(String name) {
         return Optional.ofNullable(components.get(name));
+    }
+
+    public void setupEntity() {
+        components.values().forEach(component -> {
+            if (!(component instanceof Setup setup)) return;
+            setup.setup();
+        });
     }
 
     public void updateEntity() {

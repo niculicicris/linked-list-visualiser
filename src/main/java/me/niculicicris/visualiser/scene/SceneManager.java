@@ -20,6 +20,10 @@ public class SceneManager {
         scene = new Scene();
     }
 
+    public void setupScene() {
+        scene.forEachEntity(Entity::setupEntity);
+    }
+
     public void updateScene() {
         scene.forEachEntity(Entity::updateEntity);
     }

@@ -27,6 +27,7 @@ public class VisualiserApplication {
     }
 
     private static void startLoop() {
+        sceneManager.setupScene();
         while (!window.shouldClose()) {
             update();
             render();
