@@ -2,53 +2,41 @@ package me.niculicicris.visualiser.component.transform;
 
 import org.joml.Matrix4f;
 
-public class CameraPosition implements Position {
-    private float x;
-    private float y;
-    private Matrix4f view;
+public class CameraPosition extends EntityPosition {
     private Matrix4f projection;
+    private Matrix4f view;
 
-    public CameraPosition(float x, float y) {
-        this.x = x;
-        this.y = y;
-
-        updateView();
+    public CameraPosition(final float x, final float y) {
+        super(x, y);
         updateProjection();
-    }
-
-    @Override
-    public float getX() {
-        return x;
+        updateView();
     }
 
     @Override
     public void setX(float x) {
-        this.x = x;
-    }
-
-    @Override
-    public float getY() {
-        return y;
+        super.setX(x);
+        updateView();
     }
 
     @Override
     public void setY(float y) {
-        this.y = y;
-    }
-
-    public Matrix4f getView() {
-        return view;
+        super.setY(y);
+        updateView();
     }
 
     public Matrix4f getProjection() {
         return projection;
     }
 
-    private void updateView() {
-        this.view = new Matrix4f().setTranslation(-this.x, -this.y, 0);
+    public Matrix4f getView() {
+        return view;
     }
 
     private void updateProjection() {
         this.projection = (new Matrix4f()).setOrtho(0, 1920, 0, 1080, 0, -100);
+    }
+
+    private void updateView() {
+        this.view = new Matrix4f().setTranslation(-getX(), -getY(), 0);
     }
 }

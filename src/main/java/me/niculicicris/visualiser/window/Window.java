@@ -3,9 +3,9 @@ package me.niculicicris.visualiser.window;
 import org.lwjgl.glfw.GLFWErrorCallback;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL.*;
+import static org.lwjgl.opengl.GL.createCapabilities;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Window {
     private static Window instance;
@@ -38,6 +38,9 @@ public class Window {
     private void initializeWindowHints() {
         glfwDefaultWindowHints();
 
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
         glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
@@ -52,7 +55,7 @@ public class Window {
     }
 
     private void createGlfwWindow() {
-        windowId = glfwCreateWindow(1920, 1080, "Visualiser", NULL, NULL);
+        windowId = glfwCreateWindow(1920, 1080, "Linked List Visualiser", NULL, NULL);
 
         if (windowId == NULL) {
             throw new IllegalStateException("Failed to create the GLFW window.");
@@ -67,8 +70,12 @@ public class Window {
         glfwPollEvents();
     }
 
-    public void renderWindow() {
+    public void clearWindow() {
+        glClearColor(0.09f, 0.09f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+    }
+
+    public void renderWindow() {
         glfwSwapBuffers(windowId);
     }
 

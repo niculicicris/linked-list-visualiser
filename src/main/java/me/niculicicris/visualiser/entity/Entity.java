@@ -1,7 +1,7 @@
 package me.niculicicris.visualiser.entity;
 
 import me.niculicicris.visualiser.component.Component;
-import me.niculicicris.visualiser.component.Renderer;
+import me.niculicicris.visualiser.component.renderer.Renderer;
 import me.niculicicris.visualiser.component.Script;
 import me.niculicicris.visualiser.component.Setup;
 
@@ -10,7 +10,16 @@ import java.util.Map;
 import java.util.Optional;
 
 public abstract class Entity {
+    private final String name;
     private final Map<String, Component> components = new HashMap<>();
+
+    protected Entity(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public void addComponent(String name, Component component) {
         components.put(name, component);

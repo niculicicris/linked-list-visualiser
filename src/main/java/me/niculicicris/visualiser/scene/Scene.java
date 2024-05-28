@@ -10,8 +10,8 @@ import java.util.function.Consumer;
 public class Scene {
     private final Map<String, Entity> entities = new HashMap<>();
 
-    public void addEntity(String name, Entity entity) {
-        entities.put(name, entity);
+    public void addEntity(Entity entity) {
+        entities.put(entity.getName(), entity);
     }
 
     public Optional<Entity> getEntity(String name) {

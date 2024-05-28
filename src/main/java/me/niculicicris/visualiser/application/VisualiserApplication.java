@@ -40,6 +40,7 @@ public class VisualiserApplication {
     }
 
     private static void render() {
+        window.clearWindow();
         sceneManager.renderScene();
         window.renderWindow();
     }

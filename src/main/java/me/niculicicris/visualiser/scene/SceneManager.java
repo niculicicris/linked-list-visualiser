@@ -1,5 +1,6 @@
 package me.niculicicris.visualiser.scene;
 
+import me.niculicicris.visualiser.entity.Camera;
 import me.niculicicris.visualiser.entity.Entity;
 
 public class SceneManager {
@@ -18,6 +19,11 @@ public class SceneManager {
 
     public void initialize() {
         scene = new Scene();
+        addEntities();
+    }
+
+    private void addEntities() {
+        scene.addEntity(new Camera("camera"));
     }
 
     public void setupScene() {
@@ -30,5 +36,9 @@ public class SceneManager {
 
     public void renderScene() {
         scene.forEachEntity(Entity::renderEntity);
+    }
+
+    public Scene getScene() {
+        return scene;
     }
 }
