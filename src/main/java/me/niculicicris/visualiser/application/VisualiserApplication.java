@@ -1,6 +1,7 @@
 package me.niculicicris.visualiser.application;
 
 import me.niculicicris.visualiser.font.FontManager;
+import me.niculicicris.visualiser.listener.MouseListener;
 import me.niculicicris.visualiser.scene.SceneManager;
 import me.niculicicris.visualiser.window.Window;
 

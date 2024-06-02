@@ -23,14 +23,6 @@ public class CharacterInfo {
         this.normalizedPoints = new Vector2f[4];
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public int getWidth() {
         return width;
     }

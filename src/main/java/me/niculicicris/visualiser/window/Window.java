@@ -1,7 +1,11 @@
 package me.niculicicris.visualiser.window;
 
+import me.niculicicris.visualiser.listener.MouseListener;
+import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWMouseButtonCallback;
 
+import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL.createCapabilities;
 import static org.lwjgl.opengl.GL11.*;
@@ -50,16 +54,30 @@ public class Window {
     private void initializeGlfwWindow() {
         createGlfwWindow();
         glfwMakeContextCurrent(windowId);
+        initializeCallbacks();
         glfwSwapInterval(1);
         glfwShowWindow(windowId);
         createCapabilities();
     }
 
     private void createGlfwWindow() {
-        windowId = glfwCreateWindow(1920, 1080, "Linked List Visualiser", NULL, NULL);
+        windowId = glfwCreateWindow(512, 512, "Linked List Visualiser", NULL, NULL);
 
         if (windowId == NULL) {
             throw new IllegalStateException("Failed to create the GLFW window.");
+        }
+    }
+
+    private void initializeCallbacks() {
+        GLFWCursorPosCallback positionCallback = glfwSetCursorPosCallback(windowId, MouseListener::mousePositionCallback);
+        GLFWMouseButtonCallback buttonClickCallback = glfwSetMouseButtonCallback(windowId, MouseListener::mouseButtonClickCallback);
+
+        if (positionCallback != null) {
+            positionCallback.close();
+        }
+
+        if (buttonClickCallback != null) {
+            buttonClickCallback.close();
         }
     }
 
@@ -86,6 +104,7 @@ public class Window {
     }
 
     public void cleanup() {
+        glfwFreeCallbacks(windowId);
         glfwDestroyWindow(windowId);
         glfwTerminate();
         glfwSetErrorCallback(null).free();

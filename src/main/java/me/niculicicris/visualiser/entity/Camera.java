@@ -1,6 +1,6 @@
 package me.niculicicris.visualiser.entity;
 
-import me.niculicicris.visualiser.component.transform.CameraPosition;
+import me.niculicicris.visualiser.component.position.CameraPosition;
 
 public class Camera extends Entity {
 

@@ -1,4 +1,4 @@
-package me.niculicicris.visualiser.component.transform;
+package me.niculicicris.visualiser.component.position;
 
 public class EntityPosition implements Position {
     private float x;

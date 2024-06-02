@@ -1,7 +1,7 @@
 package me.niculicicris.visualiser.shader;
 
-import me.niculicicris.visualiser.component.transform.CameraPosition;
-import me.niculicicris.visualiser.component.transform.Position;
+import me.niculicicris.visualiser.component.position.CameraPosition;
+import me.niculicicris.visualiser.component.position.Position;
 import me.niculicicris.visualiser.font.CharacterInfo;
 import me.niculicicris.visualiser.font.Font;
 import me.niculicicris.visualiser.font.FontManager;

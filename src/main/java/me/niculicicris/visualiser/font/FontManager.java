@@ -7,6 +7,8 @@ public class FontManager {
     private static FontManager instance;
     private Font font;
 
+    private FontManager() {}
+
     public static FontManager getInstance() {
         if (instance == null) {
             instance = new FontManager();
