@@ -25,6 +25,7 @@ public class Window {
         initializeGlfw();
         initializeWindowHints();
         initializeGlfwWindow();
+        enableBlending();
     }
 
     private void initializeGlfw() {
@@ -37,7 +38,7 @@ public class Window {
 
     private void initializeWindowHints() {
         glfwDefaultWindowHints();
-
+        ;
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -60,6 +61,11 @@ public class Window {
         if (windowId == NULL) {
             throw new IllegalStateException("Failed to create the GLFW window.");
         }
+    }
+
+    private void enableBlending() {
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
 
     public boolean shouldClose() {

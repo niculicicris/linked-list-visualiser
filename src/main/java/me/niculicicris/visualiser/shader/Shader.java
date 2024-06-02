@@ -17,15 +17,15 @@ public abstract class Shader {
     private int fragmentId;
     private int programId;
 
-    public Shader(String vertexSource, String fragmentSource) {
-        loadVertexShader(vertexSource);
-        loadFragmentShader(fragmentSource);
+    public Shader(String vertexPath, String fragmentPath) {
+        loadVertexShader(vertexPath);
+        loadFragmentShader(fragmentPath);
         createProgram();
         createObjects();
     }
 
-    private void loadVertexShader(String vertexSource) {
-        String source = readFile(vertexSource);
+    private void loadVertexShader(String vertexPath) {
+        String source = readFile(vertexPath);
 
         assembleVertexShader(source);
         checkVertexShaderErrors();
@@ -46,8 +46,8 @@ public abstract class Shader {
         }
     }
 
-    private void loadFragmentShader(String fragmentSource) {
-        String source = readFile(fragmentSource);
+    private void loadFragmentShader(String fragmentPath) {
+        String source = readFile(fragmentPath);
 
         assembleFragmentShader(source);
         checkFragmentShaderErrors();
@@ -92,11 +92,11 @@ public abstract class Shader {
 
     private String readFile(String path) {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        InputStream is = classLoader.getResourceAsStream(path);
+        InputStream fileStream = classLoader.getResourceAsStream(path);
 
-        if (is == null) return null;
-        try (InputStreamReader isr = new InputStreamReader(is);
-             BufferedReader reader = new BufferedReader(isr)) {
+        if (fileStream == null) return null;
+        try (InputStreamReader fileStreamReader = new InputStreamReader(fileStream);
+             BufferedReader reader = new BufferedReader(fileStreamReader)) {
             return reader.lines().collect(Collectors.joining(System.lineSeparator()));
         } catch (IOException exception) {
             return null;
@@ -132,6 +132,16 @@ public abstract class Shader {
         }
         FloatBuffer matrixBuffer = createMatrixBuffer(matrix);
         glUniformMatrix4fv(uniformLocation, false, matrixBuffer);
+    }
+
+    protected void uploadTexture(String name, int slot) {
+        int textureLocation = glGetUniformLocation(programId, name);
+
+        if (textureLocation == -1) {
+            throw new RuntimeException("Could not find uniform " + name + ".");
+        }
+
+        glUniform1i(textureLocation, slot);
     }
 
     private FloatBuffer createMatrixBuffer(Matrix4f matrix) {
