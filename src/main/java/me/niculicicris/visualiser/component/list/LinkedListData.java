@@ -1,4 +1,6 @@
-package me.niculicicris.visualiser.component;
+package me.niculicicris.visualiser.component.list;
+
+import me.niculicicris.visualiser.component.Component;
 
 public class LinkedListData implements Component {
     private Node head;

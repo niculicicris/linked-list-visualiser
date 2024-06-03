@@ -36,10 +36,10 @@ public abstract class Entity {
         });
     }
 
-    public void updateEntity() {
+    public void updateEntity(float deltaTime) {
         components.values().forEach(component -> {
             if (!(component instanceof Script script)) return;
-            script.update();
+            script.update(deltaTime);
         });
     }
 

@@ -9,6 +9,11 @@ public class EntityPosition implements Position {
         this.y = y;
     }
 
+    public EntityPosition(Position original) {
+        this.x = original.getX();
+        this.y = original.getY();
+    }
+
     @Override
     public float getX() {
         return x;
@@ -20,6 +25,11 @@ public class EntityPosition implements Position {
     }
 
     @Override
+    public void addX(float x) {
+        this.x += x;
+    }
+
+    @Override
     public float getY() {
         return y;
     }
@@ -27,5 +37,10 @@ public class EntityPosition implements Position {
     @Override
     public void setY(float y) {
         this.y = y;
+    }
+
+    @Override
+    public void addY(float y) {
+        this.y += y;
     }
 }

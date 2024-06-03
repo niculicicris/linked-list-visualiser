@@ -20,8 +20,20 @@ public class CameraPosition extends EntityPosition {
     }
 
     @Override
+    public void addX(float x) {
+        super.addX(x);
+        updateView();
+    }
+
+    @Override
     public void setY(float y) {
         super.setY(y);
+        updateView();
+    }
+
+    @Override
+    public void addY(float y) {
+        super.addY(y);
         updateView();
     }
 

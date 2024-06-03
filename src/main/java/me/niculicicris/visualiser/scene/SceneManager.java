@@ -32,8 +32,8 @@ public class SceneManager {
         scene.forEachEntity(Entity::setupEntity);
     }
 
-    public void updateScene() {
-        scene.forEachEntity(Entity::updateEntity);
+    public void updateScene(float deltaTime) {
+        scene.forEachEntity(entity -> entity.updateEntity(deltaTime));
     }
 
     public void renderScene() {

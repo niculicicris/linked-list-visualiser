@@ -1,8 +1,10 @@
 package me.niculicicris.visualiser.window;
 
+import me.niculicicris.visualiser.listener.KeyboardListener;
 import me.niculicicris.visualiser.listener.MouseListener;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
@@ -71,6 +73,7 @@ public class Window {
     private void initializeCallbacks() {
         GLFWCursorPosCallback positionCallback = glfwSetCursorPosCallback(windowId, MouseListener::mousePositionCallback);
         GLFWMouseButtonCallback buttonClickCallback = glfwSetMouseButtonCallback(windowId, MouseListener::mouseButtonClickCallback);
+        GLFWKeyCallback keyPressCallback = glfwSetKeyCallback(windowId, KeyboardListener::keyPressedCallback);
 
         if (positionCallback != null) {
             positionCallback.close();
@@ -78,6 +81,10 @@ public class Window {
 
         if (buttonClickCallback != null) {
             buttonClickCallback.close();
+        }
+
+        if (keyPressCallback != null) {
+            keyPressCallback.close();
         }
     }
 

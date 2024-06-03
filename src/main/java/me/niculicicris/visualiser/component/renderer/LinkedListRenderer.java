@@ -1,7 +1,7 @@
 package me.niculicicris.visualiser.component.renderer;
 
 import me.niculicicris.visualiser.component.Component;
-import me.niculicicris.visualiser.component.LinkedListData;
+import me.niculicicris.visualiser.component.list.LinkedListData;
 import me.niculicicris.visualiser.component.Setup;
 import me.niculicicris.visualiser.component.position.CameraPosition;
 import me.niculicicris.visualiser.component.position.EntityPosition;
@@ -34,7 +34,7 @@ public class LinkedListRenderer implements Setup, Renderer {
 
     @Override
     public void render() {
-        Position position = new EntityPosition(linkedListPosition.getX(), linkedListPosition.getY());
+        EntityPosition position = new EntityPosition(linkedListPosition);
         LinkedListData.Node current = data.getHead();
 
         while (current != null) {
@@ -52,12 +52,12 @@ public class LinkedListRenderer implements Setup, Renderer {
             borderShader.use();
 
             if (current.getNext() != null) {
-                position.setX(position.getX() + width + 72.0f);
+                position.addX(width + 72.0f);
 
                 arrowShader.setPosition(position);
                 arrowShader.use();
 
-                position.setX(position.getX() + 136.0f);
+                position.addX(136.0f);
             }
 
             current = current.getNext();

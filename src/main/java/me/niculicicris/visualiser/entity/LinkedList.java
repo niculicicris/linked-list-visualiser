@@ -1,6 +1,6 @@
 package me.niculicicris.visualiser.entity;
 
-import me.niculicicris.visualiser.component.LinkedListData;
+import me.niculicicris.visualiser.component.list.LinkedListData;
 import me.niculicicris.visualiser.component.position.EntityPosition;
 import me.niculicicris.visualiser.component.renderer.LinkedListRenderer;
 import me.niculicicris.visualiser.font.Font;
