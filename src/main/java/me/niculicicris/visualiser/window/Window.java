@@ -2,10 +2,13 @@ package me.niculicicris.visualiser.window;
 
 import me.niculicicris.visualiser.listener.KeyboardListener;
 import me.niculicicris.visualiser.listener.MouseListener;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
+
+import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
@@ -16,6 +19,8 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 public class Window {
     private static Window instance;
     private long windowId;
+    private int width;
+    private  int height;
 
     private Window() {}
 
@@ -32,6 +37,7 @@ public class Window {
         initializeWindowHints();
         initializeGlfwWindow();
         enableBlending();
+        saveWindowSize();
     }
 
     private void initializeGlfw() {
@@ -93,6 +99,16 @@ public class Window {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
 
+    private void saveWindowSize() {
+        IntBuffer widthBuffer = BufferUtils.createIntBuffer(1);
+        IntBuffer heightBuffer = BufferUtils.createIntBuffer(1);
+
+        glfwGetWindowSize(windowId, widthBuffer, heightBuffer);
+
+        this.width = widthBuffer.get(0);
+        this.height = heightBuffer.get(0);
+    }
+
     public boolean shouldClose() {
         return glfwWindowShouldClose(windowId);
     }
@@ -115,5 +131,13 @@ public class Window {
         glfwDestroyWindow(windowId);
         glfwTerminate();
         glfwSetErrorCallback(null).free();
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }

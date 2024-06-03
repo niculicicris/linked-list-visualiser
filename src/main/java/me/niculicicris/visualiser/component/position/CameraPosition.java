@@ -4,6 +4,7 @@ import org.joml.Matrix4f;
 
 public class CameraPosition extends EntityPosition {
     private Matrix4f projection;
+    private Matrix4f invertProjection;
     private Matrix4f view;
     private final Matrix4f identity = new Matrix4f().identity();
 
@@ -41,6 +42,10 @@ public class CameraPosition extends EntityPosition {
         return projection;
     }
 
+    public Matrix4f getInvertProjection() {
+        return invertProjection;
+    }
+
     public Matrix4f getView() {
         return view;
     }
@@ -51,6 +56,7 @@ public class CameraPosition extends EntityPosition {
 
     private void updateProjection() {
         this.projection = (new Matrix4f()).setOrtho(0, 1920, 0, 1080, 0, -100);
+        this.invertProjection = (new Matrix4f()).setOrtho(0, 1920, 0, 1080, 0, -100).invert();
     }
 
     private void updateView() {

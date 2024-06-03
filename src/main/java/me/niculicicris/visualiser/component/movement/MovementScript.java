@@ -2,13 +2,12 @@ package me.niculicicris.visualiser.component.movement;
 
 import me.niculicicris.visualiser.component.Component;
 import me.niculicicris.visualiser.component.Script;
-import me.niculicicris.visualiser.component.Setup;
 import me.niculicicris.visualiser.component.position.Position;
 import me.niculicicris.visualiser.listener.KeyboardListener;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-public class MovementScript implements Setup, Script {
+public class MovementScript implements Script {
     private static final float SPEED = 400;
     private final String parentName;
     private Position entityPosition;

@@ -2,6 +2,7 @@ package me.niculicicris.visualiser.application;
 
 import me.niculicicris.visualiser.font.FontManager;
 import me.niculicicris.visualiser.listener.KeyboardListener;
+import me.niculicicris.visualiser.listener.MouseListener;
 import me.niculicicris.visualiser.scene.SceneManager;
 import me.niculicicris.visualiser.time.Time;
 import me.niculicicris.visualiser.window.Window;
@@ -25,6 +26,7 @@ public class VisualiserApplication {
         initializeWindow();
         initializeFontManager();
         initializeSceneManager();
+        initializeTime();
     }
 
     private static void initializeWindow() {
@@ -39,7 +41,7 @@ public class VisualiserApplication {
         sceneManager.initialize();
     }
 
-    private void initializeTime() {
+    private static void initializeTime() {
         beginTime = Time.getTime();
         deltaTime = -1;
     }
@@ -69,6 +71,7 @@ public class VisualiserApplication {
     }
 
     private static void flush() {
+        MouseListener.flushReleasedButtons();
         KeyboardListener.flushReleasedKeys();
     }
 

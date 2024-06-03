@@ -1,10 +1,5 @@
 package me.niculicicris.visualiser.listener;
 
-import org.lwjgl.glfw.GLFW;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.lwjgl.glfw.GLFW.*;
 
 public class KeyboardListener {
