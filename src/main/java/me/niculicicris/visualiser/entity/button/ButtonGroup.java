@@ -1,4 +1,4 @@
-package me.niculicicris.visualiser.entity.input;
+package me.niculicicris.visualiser.entity.button;
 
 import me.niculicicris.visualiser.component.button.ButtonContainer;
 import me.niculicicris.visualiser.component.position.EntityPosition;

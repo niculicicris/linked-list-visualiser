@@ -24,10 +24,7 @@ public class MovementScript implements Script {
     @Override
     public void update(float deltaTime) {
         float xInput = getXInput();
-        float yInput = getYInput();
-
         entityPosition.addX(SPEED * xInput * deltaTime);
-        entityPosition.addY(SPEED * yInput * deltaTime);
     }
 
     private float getXInput() {
@@ -38,20 +35,6 @@ public class MovementScript implements Script {
         }
 
         if (KeyboardListener.isKeyPressed(GLFW_KEY_RIGHT)) {
-            input += 1;
-        }
-
-        return input;
-    }
-
-    private float getYInput() {
-        float input = 0;
-
-        if (KeyboardListener.isKeyPressed(GLFW_KEY_DOWN)) {
-            input -= 1;
-        }
-
-        if (KeyboardListener.isKeyPressed(GLFW_KEY_UP)) {
             input += 1;
         }
 

@@ -44,10 +44,6 @@ public class MouseListener {
         return getInstance().buttonReleased[GLFW_MOUSE_BUTTON_LEFT];
     }
 
-    public static boolean isRightButtonReleased() {
-        return getInstance().buttonReleased[GLFW_MOUSE_BUTTON_RIGHT];
-    }
-
     public static void flushReleasedButtons() {
         getInstance().buttonReleased = new boolean[3];
     }

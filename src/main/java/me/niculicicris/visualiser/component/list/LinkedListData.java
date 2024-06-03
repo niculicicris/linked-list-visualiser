@@ -53,6 +53,25 @@ public class LinkedListData implements Component {
         }
     }
 
+    public void delete(int value) {
+        if (head == null) return;
+        if (head.value == value) {
+            deleteAtBeginning();
+            return;
+        }
+        Node current = head;
+
+        while (current.next != null && current.next.value != value) {
+            current = current.next;
+        }
+
+        if (current.next == null) {
+            return;
+        }
+
+        current.next = current.next.next;
+    }
+
     public Node getHead() {
         return head;
     }

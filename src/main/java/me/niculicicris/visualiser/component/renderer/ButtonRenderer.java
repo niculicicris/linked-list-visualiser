@@ -39,7 +39,7 @@ public class ButtonRenderer implements Setup, Renderer {
 
     @Override
     public void render() {
-        textShader.use();
         borderShader.use();
+        textShader.use();
     }
 }

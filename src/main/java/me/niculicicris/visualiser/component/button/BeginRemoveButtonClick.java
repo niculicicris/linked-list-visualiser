@@ -3,10 +3,10 @@ package me.niculicicris.visualiser.component.button;
 import me.niculicicris.visualiser.component.Component;
 import me.niculicicris.visualiser.component.list.LinkedListData;
 
-public class BeginDeleteButtonClick extends ButtonClick {
+public class BeginRemoveButtonClick extends ButtonClick {
     private LinkedListData data;
 
-    public BeginDeleteButtonClick(String parentName, String label) {
+    public BeginRemoveButtonClick(String parentName, String label) {
         super(parentName, label);
     }
 

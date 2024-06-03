@@ -72,7 +72,7 @@ public class VisualiserApplication {
 
     private static void flush() {
         MouseListener.flushReleasedButtons();
-        KeyboardListener.flushReleasedKeys();
+        KeyboardListener.flushKeysQueue();
     }
 
     private static void registerTime() {

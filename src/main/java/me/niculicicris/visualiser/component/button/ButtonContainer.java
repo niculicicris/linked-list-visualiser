@@ -4,7 +4,7 @@ import me.niculicicris.visualiser.component.Component;
 import me.niculicicris.visualiser.component.Script;
 import me.niculicicris.visualiser.component.position.EntityPosition;
 import me.niculicicris.visualiser.component.position.Position;
-import me.niculicicris.visualiser.entity.input.Button;
+import me.niculicicris.visualiser.entity.button.Button;
 import me.niculicicris.visualiser.font.Font;
 import me.niculicicris.visualiser.font.FontManager;
 

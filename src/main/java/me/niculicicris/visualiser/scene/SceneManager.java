@@ -1,14 +1,12 @@
 package me.niculicicris.visualiser.scene;
 
-import me.niculicicris.visualiser.component.button.BeginDeleteButtonClick;
-import me.niculicicris.visualiser.component.button.BeginInsertButtonClick;
-import me.niculicicris.visualiser.component.button.EndDeleteButtonClick;
-import me.niculicicris.visualiser.component.button.EndInsertButtonClick;
+import me.niculicicris.visualiser.component.button.*;
 import me.niculicicris.visualiser.entity.Camera;
 import me.niculicicris.visualiser.entity.Entity;
+import me.niculicicris.visualiser.entity.Input;
 import me.niculicicris.visualiser.entity.LinkedList;
-import me.niculicicris.visualiser.entity.input.Button;
-import me.niculicicris.visualiser.entity.input.ButtonGroup;
+import me.niculicicris.visualiser.entity.button.Button;
+import me.niculicicris.visualiser.entity.button.ButtonGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +34,7 @@ public class SceneManager {
         addCamera();
         addList();
         addButtons();
+        addInput();
     }
 
     private void addCamera() {
@@ -51,15 +50,16 @@ public class SceneManager {
 
         buttons.add(addBeginInsertButton());
         buttons.add(addEndInsertButton());
-        buttons.add(addBeginDeleteButton());
-        buttons.add(addEndDeleteButton());
+        buttons.add(addBeginRemoveButton());
+        buttons.add(addEndRemoveButton());
+        buttons.add(addDeleteButton());
 
         scene.addEntity(new ButtonGroup("buttons", buttons));
     }
 
     private Button addBeginInsertButton() {
         String name = "begin_insert";
-        String label = "Begin Insert";
+        String label = "Beginning Insert";
 
         BeginInsertButtonClick click = new BeginInsertButtonClick(name, label);
         Button button = new Button(name, label, click);
@@ -81,11 +81,11 @@ public class SceneManager {
         return button;
     }
 
-    private Button addBeginDeleteButton() {
+    private Button addBeginRemoveButton() {
         String name = "begin_delete";
-        String label = "Begin Delete";
+        String label = "Beginning Remove";
 
-        BeginDeleteButtonClick click = new BeginDeleteButtonClick(name, label);
+        BeginRemoveButtonClick click = new BeginRemoveButtonClick(name, label);
         Button button = new Button(name, label, click);
 
         scene.addEntity(button);
@@ -93,16 +93,32 @@ public class SceneManager {
         return button;
     }
 
-    private Button addEndDeleteButton() {
+    private Button addEndRemoveButton() {
         String name = "end_delete";
-        String label = "End Delete";
+        String label = "End Remove";
 
-        EndDeleteButtonClick click = new EndDeleteButtonClick(name, label);
+        EndRemoveButtonClick click = new EndRemoveButtonClick(name, label);
         Button button = new Button(name, label, click);
 
         scene.addEntity(button);
 
         return button;
+    }
+
+    private Button addDeleteButton() {
+        String name = "delete";
+        String label = "Remove";
+
+        RemoveButtonClick click = new RemoveButtonClick(name, label);
+        Button button = new Button(name, label, click);
+
+        scene.addEntity(button);
+
+        return button;
+    }
+
+    private void addInput() {
+        scene.addEntity(new Input("input"));
     }
 
     public void setupScene() {
