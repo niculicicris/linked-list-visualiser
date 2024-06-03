@@ -5,6 +5,7 @@ import me.niculicicris.visualiser.component.position.Position;
 import me.niculicicris.visualiser.font.CharacterInfo;
 import me.niculicicris.visualiser.font.Font;
 import me.niculicicris.visualiser.font.FontManager;
+import org.joml.Matrix4f;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
@@ -20,9 +21,10 @@ public class TextShader extends Shader {
     private static final String FRAGMENT_SHADER_PATH = "shader/text/TextFragmentShader.glsl";
 
     private final CameraPosition cameraPosition;
-    private final Position textPosition;
+    private Position textPosition;
     private final Font font;
     private String text;
+    private boolean fixed;
 
     private int vaoId;
     private int vboId;
@@ -35,6 +37,7 @@ public class TextShader extends Shader {
         this.textPosition = textPosition;
         this.font = FontManager.getInstance().getFont();
         this.text = text;
+        this.fixed = false;
 
         updateBufferSize();
     }
@@ -186,7 +189,12 @@ public class TextShader extends Shader {
 
     private void uploadUniforms() {
         uploadUniformMatrix("uProjection", cameraPosition.getProjection());
-        uploadUniformMatrix("uView", cameraPosition.getView());
+
+        if (fixed) {
+            uploadUniformMatrix("uView", cameraPosition.getIdentity());
+        } else {
+            uploadUniformMatrix("uView", cameraPosition.getView());
+        }
     }
 
     private void uploadTexture() {
@@ -208,8 +216,14 @@ public class TextShader extends Shader {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
         glBindVertexArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindTexture(GL_TEXTURE_2D, 0);
         glUseProgram(0);
+    }
+
+    public void setTextPosition(Position textPosition) {
+        this.textPosition = textPosition;
     }
 
     public void setText(String text) {
@@ -222,8 +236,14 @@ public class TextShader extends Shader {
     }
 
     private void updateBufferSize() {
+        attachVertexArrayObject();
         updateVertexBufferSize();
         updateElementBufferSize();
+        detachVertexArrayObject();
+    }
+
+    private void attachVertexArrayObject() {
+        glBindVertexArray(vaoId);
     }
 
     private void updateVertexBufferSize() {
@@ -238,5 +258,14 @@ public class TextShader extends Shader {
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboId);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, newBuffer, GL_DYNAMIC_DRAW);
+    }
+
+    private void detachVertexArrayObject() {
+        glBindVertexArray(0);
+    }
+
+
+    public void setFixed(boolean fixed) {
+        this.fixed = fixed;
     }
 }

@@ -2,6 +2,7 @@ package me.niculicicris.visualiser.scene;
 
 import me.niculicicris.visualiser.entity.Camera;
 import me.niculicicris.visualiser.entity.Entity;
+import me.niculicicris.visualiser.entity.LinkedList;
 
 public class SceneManager {
     private static SceneManager instance;
@@ -24,6 +25,7 @@ public class SceneManager {
 
     private void addEntities() {
         scene.addEntity(new Camera("camera"));
+        scene.addEntity(new LinkedList("list"));
     }
 
     public void setupScene() {

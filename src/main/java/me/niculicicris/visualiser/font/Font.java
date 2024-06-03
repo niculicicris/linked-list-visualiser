@@ -189,4 +189,28 @@ public class Font {
     public int getTextureId() {
         return textureId;
     }
+
+    public float calculateWidth(String text) {
+        float width = 0;
+
+        for (char character : text.toCharArray()) {
+            CharacterInfo info = getCharacterInfo(character);
+            width += info.getXAdvance();
+        }
+
+        return width;
+    }
+
+    public float calculateHeight(String text) {
+        float height = 0;
+
+        for (char character : text.toCharArray()) {
+            CharacterInfo info = getCharacterInfo(character);
+            if (info.getHeight() > height) {
+                height = info.getHeight();
+            }
+        }
+
+        return height;
+    }
 }

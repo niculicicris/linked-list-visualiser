@@ -61,7 +61,7 @@ public class Window {
     }
 
     private void createGlfwWindow() {
-        windowId = glfwCreateWindow(512, 512, "Linked List Visualiser", NULL, NULL);
+        windowId = glfwCreateWindow(1920, 1080, "Linked List Visualiser", NULL, NULL);
 
         if (windowId == NULL) {
             throw new IllegalStateException("Failed to create the GLFW window.");
